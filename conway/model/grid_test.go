@@ -50,3 +50,15 @@ func TestGrid_Width(t *testing.T) {
 		assert.Equal(t, 3, grid.Width())
 	})
 }
+
+func TestGrid_IsAlive(t *testing.T) {
+	t.Run("when cell at given row and column is alive returns true", func(t *testing.T) {
+		twoByThree := map[int]map[int]Void{
+			0: {0: Void{}, 1: Void{}},
+			1: {1: Void{}, 2: Void{}},
+		}
+		grid := NewGrid(twoByThree)
+
+		assert.True(t, grid.IsAlive(0, 1))
+	})
+}

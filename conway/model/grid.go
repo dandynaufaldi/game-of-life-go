@@ -37,3 +37,7 @@ func (g Grid) Height() int {
 func (g Grid) Width() int {
 	return g.width
 }
+
+func (g Grid) IsAlive(row, column int) bool {
+	return true
+}
