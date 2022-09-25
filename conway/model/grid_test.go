@@ -112,3 +112,14 @@ func TestGrid_String(t *testing.T) {
 		assert.Equal(t, "#\n###", grid.String())
 	})
 }
+
+func TestGrid_NeighbourCount(t *testing.T) {
+	t.Run("when all 8 cells around are dead returns 0", func(t *testing.T) {
+		initialState := map[int]map[int]Void{
+			1: {1: Void{}},
+		}
+		grid := NewGrid(initialState)
+
+		assert.Equal(t, 0, grid.NeighbourCount(1, 1))
+	})
+}

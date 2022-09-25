@@ -60,6 +60,10 @@ func (g Grid) String() string {
 	return strings.TrimRight(sb.String(), "\n")
 }
 
+func (g Grid) NeighbourCount(row, column int) int {
+	return 0
+}
+
 func (g Grid) mapRowToString(row int) string {
 	var sb strings.Builder
 	for column := 0; column < g.Width(); column++ {
