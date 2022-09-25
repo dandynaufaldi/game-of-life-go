@@ -70,6 +70,7 @@ func (g Grid) NeighbourCount(row, column int) int {
 		{row: -1, column: +1},
 		{row: 0, column: -1},
 		{row: 0, column: +1},
+		{row: +1, column: -1},
 	}
 
 	for _, direction := range directions {
