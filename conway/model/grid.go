@@ -39,5 +39,11 @@ func (g Grid) Width() int {
 }
 
 func (g Grid) IsAlive(row, column int) bool {
-	return true
+	if columns, ok := g.state[row]; ok {
+		if _, ok := columns[column]; ok {
+			return true
+		}
+	}
+
+	return false
 }

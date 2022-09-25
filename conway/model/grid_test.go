@@ -61,4 +61,14 @@ func TestGrid_IsAlive(t *testing.T) {
 
 		assert.True(t, grid.IsAlive(0, 1))
 	})
+
+	t.Run("when cell at given row and column is dead returns false", func(t *testing.T) {
+		twoByThree := map[int]map[int]Void{
+			0: {0: Void{}, 1: Void{}},
+			1: {1: Void{}, 2: Void{}},
+		}
+		grid := NewGrid(twoByThree)
+
+		assert.False(t, grid.IsAlive(0, 2))
+	})
 }
