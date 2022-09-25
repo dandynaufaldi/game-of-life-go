@@ -62,15 +62,17 @@ func (g Grid) String() string {
 
 func (g Grid) NeighbourCount(row, column int) int {
 	neighbourCount := 0
-	directions := [][2]int{
-		{-1, -1},
-		{-1, 0},
-		{-1, +1},
-		{0, -1},
+	directions := []struct {
+		row, column int
+	}{
+		{row: -1, column: -1},
+		{row: -1, column: 0},
+		{row: -1, column: +1},
+		{row: 0, column: -1},
 	}
 
 	for _, direction := range directions {
-		if g.IsAlive(row+direction[0], column+direction[1]) {
+		if g.IsAlive(row+direction.row, column+direction.column) {
 			neighbourCount += 1
 		}
 	}
