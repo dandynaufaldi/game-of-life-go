@@ -39,4 +39,14 @@ func TestGrid_Width(t *testing.T) {
 
 		assert.Equal(t, 2, grid.Width())
 	})
+
+	t.Run("when initialized with 2x3 returns 3", func(t *testing.T) {
+		twoByThree := map[int]map[int]Void{
+			0: {0: Void{}, 1: Void{}},
+			1: {1: Void{}, 2: Void{}},
+		}
+		grid := NewGrid(twoByThree)
+
+		assert.Equal(t, 3, grid.Width())
+	})
 }
