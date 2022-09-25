@@ -72,3 +72,14 @@ func TestGrid_IsAlive(t *testing.T) {
 		assert.False(t, grid.IsAlive(0, 2))
 	})
 }
+
+func TestGrid_String(t *testing.T) {
+	t.Run("when cell is alive returns hashtag", func(t *testing.T) {
+		initialState := map[int]map[int]Void{
+			0: {0: Void{}, 1: Void{}},
+		}
+		grid := NewGrid(initialState)
+
+		assert.Equal(t, "##", grid.String())
+	})
+}

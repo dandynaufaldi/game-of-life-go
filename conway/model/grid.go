@@ -47,3 +47,7 @@ func (g Grid) IsAlive(row, column int) bool {
 
 	return false
 }
+
+func (g Grid) String() string {
+	return "##"
+}
