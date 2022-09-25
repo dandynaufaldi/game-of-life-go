@@ -61,6 +61,10 @@ func (g Grid) String() string {
 }
 
 func (g Grid) NeighbourCount(row, column int) int {
+	if g.IsAlive(row-1, column-1) {
+		return 1
+	}
+
 	return 0
 }
 
