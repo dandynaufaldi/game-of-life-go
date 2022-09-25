@@ -70,6 +70,10 @@ func (g Grid) NeighbourCount(row, column int) int {
 		neighbourCount += 1
 	}
 
+	if g.IsAlive(row-1, column+1) {
+		neighbourCount += 1
+	}
+
 	return neighbourCount
 }
 

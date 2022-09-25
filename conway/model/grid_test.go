@@ -142,4 +142,14 @@ func TestGrid_NeighbourCount(t *testing.T) {
 
 		assert.Equal(t, 1, grid.NeighbourCount(1, 1))
 	})
+
+	t.Run("when top right cell is alive returns 1", func(t *testing.T) {
+		initialState := map[int]map[int]Void{
+			0: {2: Void{}},
+			1: {1: Void{}},
+		}
+		grid := NewGrid(initialState)
+
+		assert.Equal(t, 1, grid.NeighbourCount(1, 1))
+	})
 }
