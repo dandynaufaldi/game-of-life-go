@@ -28,3 +28,15 @@ func TestGrid_Height(t *testing.T) {
 		assert.Equal(t, 3, grid.Height())
 	})
 }
+
+func TestGrid_Width(t *testing.T) {
+	t.Run("when initialized with 2x2 returns 2", func(t *testing.T) {
+		twoByTwo := map[int]map[int]Void{
+			0: {0: Void{}, 1: Void{}},
+			1: {1: Void{}},
+		}
+		grid := NewGrid(twoByTwo)
+
+		assert.Equal(t, 2, grid.Width())
+	})
+}

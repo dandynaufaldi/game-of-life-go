@@ -24,3 +24,7 @@ func NewGrid(initialState map[int]map[int]Void) Grid {
 func (g Grid) Height() int {
 	return g.height
 }
+
+func (g Grid) Width() int {
+	return 2
+}
