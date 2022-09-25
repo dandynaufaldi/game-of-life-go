@@ -53,12 +53,20 @@ func (g Grid) IsAlive(row, column int) bool {
 func (g Grid) String() string {
 	var sb strings.Builder
 	for row := 0; row < g.Height(); row++ {
-		for column := 0; column < g.Width(); column++ {
-			if g.IsAlive(row, column) {
-				sb.WriteString("#")
-			} else {
-				sb.WriteString(" ")
-			}
+		sb.WriteString(g.mapRowToString(row))
+		sb.WriteString("\n")
+	}
+
+	return strings.TrimSuffix(sb.String(), "\n")
+}
+
+func (g Grid) mapRowToString(row int) string {
+	var sb strings.Builder
+	for column := 0; column < g.Width(); column++ {
+		if g.IsAlive(row, column) {
+			sb.WriteString("#")
+		} else {
+			sb.WriteString(" ")
 		}
 	}
 

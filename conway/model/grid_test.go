@@ -91,4 +91,14 @@ func TestGrid_String(t *testing.T) {
 
 		assert.Equal(t, " #", grid.String())
 	})
+
+	t.Run("when there are multirow cells should add newline", func(t *testing.T) {
+		initialState := map[int]map[int]Void{
+			0: {0: Void{}, 1: Void{}},
+			1: {1: Void{}},
+		}
+		grid := NewGrid(initialState)
+
+		assert.Equal(t, "##\n #", grid.String())
+	})
 }
