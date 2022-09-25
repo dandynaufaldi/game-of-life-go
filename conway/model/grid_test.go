@@ -82,4 +82,13 @@ func TestGrid_String(t *testing.T) {
 
 		assert.Equal(t, "##", grid.String())
 	})
+
+	t.Run("when cell is dead returns space", func(t *testing.T) {
+		initialState := map[int]map[int]Void{
+			0: {1: Void{}},
+		}
+		grid := NewGrid(initialState)
+
+		assert.Equal(t, " #", grid.String())
+	})
 }

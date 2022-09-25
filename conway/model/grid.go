@@ -1,5 +1,7 @@
 package model
 
+import "strings"
+
 type Grid struct {
 	state  map[int]map[int]Void
 	height int
@@ -49,5 +51,16 @@ func (g Grid) IsAlive(row, column int) bool {
 }
 
 func (g Grid) String() string {
-	return "##"
+	var sb strings.Builder
+	for row := 0; row < g.Height(); row++ {
+		for column := 0; column < g.Width(); column++ {
+			if g.IsAlive(row, column) {
+				sb.WriteString("#")
+			} else {
+				sb.WriteString(" ")
+			}
+		}
+	}
+
+	return sb.String()
 }
