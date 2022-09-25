@@ -101,4 +101,14 @@ func TestGrid_String(t *testing.T) {
 
 		assert.Equal(t, "##\n #", grid.String())
 	})
+
+	t.Run("when there are dead cells on right edge should be trimmed", func(t *testing.T) {
+		initialState := map[int]map[int]Void{
+			0: {0: Void{}},
+			1: {0: Void{}, 1: Void{}, 2: Void{}},
+		}
+		grid := NewGrid(initialState)
+
+		assert.Equal(t, "#\n###", grid.String())
+	})
 }

@@ -57,7 +57,7 @@ func (g Grid) String() string {
 		sb.WriteString("\n")
 	}
 
-	return strings.TrimSuffix(sb.String(), "\n")
+	return strings.TrimRight(sb.String(), "\n")
 }
 
 func (g Grid) mapRowToString(row int) string {
@@ -70,5 +70,5 @@ func (g Grid) mapRowToString(row int) string {
 		}
 	}
 
-	return sb.String()
+	return strings.TrimRight(sb.String(), " ")
 }
