@@ -20,7 +20,22 @@ func TestParser_Parse(t *testing.T) {
 			0: {0: model.Void{}, 1: model.Void{}},
 			1: {0: model.Void{}, 1: model.Void{}},
 		}
-		
+
+		assert.Equal(t, expectedState, parser.Parse(input))
+	})
+
+	t.Run("when given all alive cells as input returns state containing those alive cells", func(t *testing.T) {
+		input, err := os.Open("testdata/all_alive.txt")
+		require.NoError(t, err)
+		defer input.Close()
+
+		parser := NewParser()
+		expectedState := map[int]map[int]model.Void{
+			0: {0: model.Void{}},
+			1: {0: model.Void{}},
+			2: {0: model.Void{}},
+		}
+
 		assert.Equal(t, expectedState, parser.Parse(input))
 	})
 }

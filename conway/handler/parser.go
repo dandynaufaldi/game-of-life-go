@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"bufio"
 	"io"
 
 	"github.com/dandynaufaldi/game-of-life/go-1/conway/model"
@@ -13,8 +14,17 @@ func NewParser() *Parser {
 }
 
 func (p *Parser) Parse(reader io.Reader) map[int]map[int]model.Void {
-	return map[int]map[int]model.Void{
-		0: {0: model.Void{}, 1: model.Void{}},
-		1: {0: model.Void{}, 1: model.Void{}},
+	scanner := bufio.NewScanner(reader)
+	row := 0
+	state := make(map[int]map[int]model.Void)
+
+	for scanner.Scan() {
+		state[row] = make(map[int]model.Void)
+		for i := range scanner.Text() {
+			state[row][i] = model.Void{}
+		}
+		row++
 	}
+
+	return state
 }
