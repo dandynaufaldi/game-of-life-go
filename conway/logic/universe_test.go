@@ -19,4 +19,16 @@ func TestUniverse_Tick(t *testing.T) {
 
 		assert.Equal(t, expectedPattern, universe.Tick(grid).String())
 	})
+
+	t.Run("when alive cell has less than 2 neighbor should be killed", func(t *testing.T) {
+		state := map[int]map[int]model.Void{
+			0: {2: model.Void{}},
+			2: {0: model.Void{}},
+		}
+		grid := model.NewGrid(state)
+		universe := NewUniverse()
+		expectedPattern := "Board\n\n\n"
+
+		assert.Equal(t, expectedPattern, universe.Tick(grid).String())
+	})
 }

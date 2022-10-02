@@ -58,7 +58,7 @@ func (g Grid) String() string {
 		sb.WriteString("\n")
 	}
 
-	return strings.TrimRight(sb.String(), "\n")
+	return strings.TrimSuffix(sb.String(), "\n")
 }
 
 func (g Grid) NeighbourCount(row, column int) int {
