@@ -52,6 +52,7 @@ func (g Grid) IsAlive(row, column int) bool {
 
 func (g Grid) String() string {
 	var sb strings.Builder
+	sb.WriteString("Board\n")
 	for row := 0; row < g.Height(); row++ {
 		sb.WriteString(g.mapRowToString(row))
 		sb.WriteString("\n")

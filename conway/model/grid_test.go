@@ -80,7 +80,7 @@ func TestGrid_String(t *testing.T) {
 		}
 		grid := NewGrid(initialState)
 
-		assert.Equal(t, "##", grid.String())
+		assert.Equal(t, "Board\n##", grid.String())
 	})
 
 	t.Run("when cell is dead returns space", func(t *testing.T) {
@@ -89,7 +89,7 @@ func TestGrid_String(t *testing.T) {
 		}
 		grid := NewGrid(initialState)
 
-		assert.Equal(t, " #", grid.String())
+		assert.Equal(t, "Board\n #", grid.String())
 	})
 
 	t.Run("when there are multirow cells should add newline", func(t *testing.T) {
@@ -99,7 +99,7 @@ func TestGrid_String(t *testing.T) {
 		}
 		grid := NewGrid(initialState)
 
-		assert.Equal(t, "##\n #", grid.String())
+		assert.Equal(t, "Board\n##\n #", grid.String())
 	})
 
 	t.Run("when there are dead cells on right edge should be trimmed", func(t *testing.T) {
@@ -109,7 +109,7 @@ func TestGrid_String(t *testing.T) {
 		}
 		grid := NewGrid(initialState)
 
-		assert.Equal(t, "#\n###", grid.String())
+		assert.Equal(t, "Board\n#\n###", grid.String())
 	})
 }
 
