@@ -13,19 +13,28 @@ func (u *Universe) Tick(currentGrid model.Grid) model.Grid {
 		state[row] = make(map[int]model.Void)
 
 		for column := 0; column < currentGrid.Height(); column++ {
-			if currentGrid.IsAlive(row, column) {
-				if currentGrid.NeighbourCount(row, column) < 2 {
-					continue
-				} else {
-					state[row][column] = model.Void{}
-				}
-			} else {
-				if currentGrid.NeighbourCount(row, column) == 3 {
-					state[row][column] = model.Void{}
-				}
+			if u.shouldCellStayAlive(currentGrid, row, column) ||
+				u.shouldCellBeRevived(currentGrid, row, column) {
+				state[row][column] = model.Void{}
 			}
 		}
 	}
 
 	return model.NewGrid(state)
+}
+
+func (u *Universe) shouldCellStayAlive(grid model.Grid, row, column int) bool {
+	if !grid.IsAlive(row, column) {
+		return false
+	}
+
+	return grid.NeighbourCount(row, column) >= 2
+}
+
+func (u *Universe) shouldCellBeRevived(grid model.Grid, row, column int) bool {
+	if grid.IsAlive(row, column) {
+		return false
+	}
+
+	return grid.NeighbourCount(row, column) == 3
 }
