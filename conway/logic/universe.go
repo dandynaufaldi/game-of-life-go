@@ -7,6 +7,7 @@ type Universe struct{}
 func NewUniverse() *Universe { return &Universe{} }
 
 func (u *Universe) Tick(currentGrid model.Grid) model.Grid {
+	currentGrid = u.expandGrid(currentGrid)
 	state := make(map[int]map[int]model.Void)
 
 	for row := 0; row < currentGrid.Height(); row++ {
@@ -38,4 +39,30 @@ func (u *Universe) shouldCellBeRevived(grid model.Grid, row, column int) bool {
 	}
 
 	return grid.NeighbourCount(row, column) == 3
+}
+
+func (u *Universe) expandGrid(grid model.Grid) model.Grid {
+	newGrid := grid
+	if u.shouldExpandLeft(grid) {
+		newGrid = newGrid.ExpandLeft()
+	}
+
+	return newGrid
+}
+
+func (u *Universe) shouldExpandLeft(grid model.Grid) bool {
+	aliveCounter := 0
+	for row := 0; row < grid.Height(); row++ {
+		if grid.IsAlive(row, 0) {
+			aliveCounter++
+		} else {
+			aliveCounter = 0
+		}
+
+		if aliveCounter == 3 {
+			return true
+		}
+	}
+
+	return false
 }
