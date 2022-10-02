@@ -31,4 +31,17 @@ func TestUniverse_Tick(t *testing.T) {
 
 		assert.Equal(t, expectedPattern, universe.Tick(grid).String())
 	})
+
+	t.Run("when dead cell has 3 neighbors should be revived", func(t *testing.T) {
+		state := map[int]map[int]model.Void{
+			0: {1: model.Void{}},
+			1: {1: model.Void{}},
+			2: {1: model.Void{}},
+		}
+		grid := model.NewGrid(state)
+		universe := NewUniverse()
+		expectedPattern := "Board\n\n###\n"
+
+		assert.Equal(t, expectedPattern, universe.Tick(grid).String())
+	})
 }

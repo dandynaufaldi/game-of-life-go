@@ -19,8 +19,13 @@ func (u *Universe) Tick(currentGrid model.Grid) model.Grid {
 				} else {
 					state[row][column] = model.Void{}
 				}
+			} else {
+				if currentGrid.NeighbourCount(row, column) == 3 {
+					state[row][column] = model.Void{}
+				}
 			}
 		}
 	}
+
 	return model.NewGrid(state)
 }
