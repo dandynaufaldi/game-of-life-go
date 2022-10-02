@@ -201,3 +201,19 @@ func TestGrid_NeighbourCount(t *testing.T) {
 		assert.Equal(t, 1, grid.NeighbourCount(1, 1))
 	})
 }
+
+func TestGrid_ExpandLeft(t *testing.T) {
+	t.Run("add column at left with dead cell", func(t *testing.T) {
+		state := map[int]map[int]Void{
+			1: {1: Void{}},
+			2: {2: Void{}},
+		}
+		grid := NewGrid(state)
+		expandedGrid := grid.ExpandLeft()
+
+		assert.Equal(t, grid.Width()+1, expandedGrid.Width())
+		for row := 0; row < expandedGrid.Height(); row++ {
+			assert.False(t, expandedGrid.IsAlive(row, 0))
+		}
+	})
+}

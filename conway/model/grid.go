@@ -85,6 +85,19 @@ func (g Grid) NeighbourCount(row, column int) int {
 	return neighbourCount
 }
 
+func (g Grid) ExpandLeft() Grid {
+	newState := make(map[int]map[int]Void)
+	for row, columns := range g.state {
+		newState[row] = make(map[int]Void)
+
+		for column := range columns {
+			newState[row][column+1] = Void{}
+		}
+	}
+
+	return NewGrid(newState)
+}
+
 func (g Grid) mapRowToString(row int) string {
 	var sb strings.Builder
 	for column := 0; column < g.Width(); column++ {
