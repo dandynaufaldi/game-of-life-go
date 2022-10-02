@@ -28,7 +28,8 @@ func (u *Universe) shouldCellStayAlive(grid model.Grid, row, column int) bool {
 		return false
 	}
 
-	return grid.NeighbourCount(row, column) >= 2
+	neighbour := grid.NeighbourCount(row, column)
+	return neighbour >= 2 && neighbour <= 3
 }
 
 func (u *Universe) shouldCellBeRevived(grid model.Grid, row, column int) bool {
