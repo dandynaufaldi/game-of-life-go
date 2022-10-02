@@ -38,4 +38,19 @@ func TestParser_Parse(t *testing.T) {
 
 		assert.Equal(t, expectedState, parser.Parse(input))
 	})
+
+	t.Run("when given combination of alive and dead cells as input returns state containing only alive cells", func(t *testing.T) {
+		input, err := os.Open("testdata/combination.txt")
+		require.NoError(t, err)
+		defer input.Close()
+
+		parser := NewParser()
+		expectedState := map[int]map[int]model.Void{
+			0: {1: model.Void{}},
+			1: {1: model.Void{}},
+			2: {1: model.Void{}},
+		}
+
+		assert.Equal(t, expectedState, parser.Parse(input))
+	})
 }
