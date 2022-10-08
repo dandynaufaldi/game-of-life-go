@@ -62,7 +62,20 @@ func TestUniverse_Tick(t *testing.T) {
 		state := map[int]map[int]model.Void{
 			0: {0: model.Void{}},
 			1: {0: model.Void{}},
-			2: {0: model.Void{},},
+			2: {0: model.Void{}},
+		}
+		grid := model.NewGrid(state)
+		universe := NewUniverse()
+		expectedPattern := "Board\n\n###\n"
+
+		assert.Equal(t, expectedPattern, universe.Tick(grid).String())
+	})
+
+	t.Run("when there are 3 alive cells on right edge should expand right edge", func(t *testing.T) {
+		state := map[int]map[int]model.Void{
+			0: {1: model.Void{}},
+			1: {1: model.Void{}},
+			2: {1: model.Void{}},
 		}
 		grid := model.NewGrid(state)
 		universe := NewUniverse()

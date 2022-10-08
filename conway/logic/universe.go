@@ -13,7 +13,7 @@ func (u *Universe) Tick(currentGrid model.Grid) model.Grid {
 	for row := 0; row < currentGrid.Height(); row++ {
 		state[row] = make(map[int]model.Void)
 
-		for column := 0; column < currentGrid.Height(); column++ {
+		for column := 0; column < currentGrid.Width()+1; column++ {
 			if u.shouldCellStayAlive(currentGrid, row, column) ||
 				u.shouldCellBeRevived(currentGrid, row, column) {
 				state[row][column] = model.Void{}
