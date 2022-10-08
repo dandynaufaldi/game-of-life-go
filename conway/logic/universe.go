@@ -62,50 +62,30 @@ func (u *Universe) expandGrid(grid model.Grid) model.Grid {
 }
 
 func (u *Universe) shouldExpandLeft(grid model.Grid) bool {
-	aliveCounter := 0
-	for row := 0; row < grid.Height(); row++ {
-		if grid.IsAlive(row, 0) {
-			aliveCounter++
-		} else {
-			aliveCounter = 0
-		}
-
-		if aliveCounter == 3 {
-			return true
-		}
-	}
-
-	return false
+	return u.shouldExpand(grid, 0, 0, grid.Height(), 1)
 }
 
 func (u *Universe) shouldExpandBottom(grid model.Grid) bool {
-	aliveCounter := 0
-	for column := 0; column < grid.Width(); column++ {
-		if grid.IsAlive(grid.Height()-1, column) {
-			aliveCounter++
-		} else {
-			aliveCounter = 0
-		}
-
-		if aliveCounter == 3 {
-			return true
-		}
-	}
-
-	return false
+	return u.shouldExpand(grid, grid.Height()-1, 0, grid.Height(), grid.Width())
 }
 
 func (u *Universe) shouldExpandTop(grid model.Grid) bool {
-	aliveCounter := 0
-	for column := 0; column < grid.Width(); column++ {
-		if grid.IsAlive(0, column) {
-			aliveCounter++
-		} else {
-			aliveCounter = 0
-		}
+	return u.shouldExpand(grid, 0, 0, 1, grid.Width())
+}
 
-		if aliveCounter == 3 {
-			return true
+func (u *Universe) shouldExpand(grid model.Grid, rowStart, columnStart, rowStop, columnStop int) bool {
+	aliveCounter := 0
+	for row := rowStart; row < rowStop; row++ {
+		for column := columnStart; column < columnStop; column++ {
+			if grid.IsAlive(row, column) {
+				aliveCounter++
+			} else {
+				aliveCounter = 0
+			}
+
+			if aliveCounter == 3 {
+				return true
+			}
 		}
 	}
 
