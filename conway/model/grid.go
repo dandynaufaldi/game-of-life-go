@@ -111,6 +111,20 @@ func (g Grid) ExpandTop() Grid {
 	return NewGrid(newState)
 }
 
+func (g Grid) ExpandBottom() Grid {
+	newState := make(map[int]map[int]Void)
+	for row, columns := range g.state {
+		newState[row] = make(map[int]Void)
+
+		for column := range columns {
+			newState[row][column] = Void{}
+		}
+	}
+	newState[g.Height()] = make(map[int]Void)
+
+	return NewGrid(newState)
+}
+
 func (g Grid) mapRowToString(row int) string {
 	var sb strings.Builder
 	for column := 0; column < g.Width(); column++ {

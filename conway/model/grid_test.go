@@ -233,3 +233,19 @@ func TestGrid_ExpandTop(t *testing.T) {
 		}
 	})
 }
+
+func TestGrid_ExpandBottom(t *testing.T) {
+	t.Run("add row at bottom with dead cell", func(t *testing.T) {
+		state := map[int]map[int]Void{
+			1: {1: Void{}},
+			2: {2: Void{}},
+		}
+		grid := NewGrid(state)
+		expandedGrid := grid.ExpandBottom()
+
+		assert.Equal(t, grid.Height()+1, expandedGrid.Height())
+		for column := 0; column < expandedGrid.Width(); column++ {
+			assert.False(t, expandedGrid.IsAlive(expandedGrid.Height()-1, column))
+		}
+	})
+}
