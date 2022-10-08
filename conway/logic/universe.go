@@ -54,6 +54,10 @@ func (u *Universe) expandGrid(grid model.Grid) model.Grid {
 		newGrid = newGrid.ExpandBottom()
 	}
 
+	if u.shouldExpandTop(grid) {
+		newGrid = newGrid.ExpandTop()
+	}
+
 	return newGrid
 }
 
@@ -78,6 +82,23 @@ func (u *Universe) shouldExpandBottom(grid model.Grid) bool {
 	aliveCounter := 0
 	for column := 0; column < grid.Width(); column++ {
 		if grid.IsAlive(grid.Height()-1, column) {
+			aliveCounter++
+		} else {
+			aliveCounter = 0
+		}
+
+		if aliveCounter == 3 {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (u *Universe) shouldExpandTop(grid model.Grid) bool {
+	aliveCounter := 0
+	for column := 0; column < grid.Width(); column++ {
+		if grid.IsAlive(0, column) {
 			aliveCounter++
 		} else {
 			aliveCounter = 0
